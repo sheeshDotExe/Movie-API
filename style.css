@@ -1,0 +1,94 @@
+body {
+  background-color: #475569;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+nav {
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 12rem;
+  background-color: #64748b;
+  align-items: center;
+  justify-content: center;
+}
+
+nav h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.search-bar {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}
+
+#search-field {
+  text-align: center;
+  width: 20rem;
+  height: 2rem;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem 4rem;
+  background-color: hsl(34, 78%, 91%);
+  padding: 1rem 1rem;
+  gap: 1rem;
+  border-radius: 2rem;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.movie h1,
+p {
+  margin: 0;
+}
+
+.movie h1 {
+  font-size: 1.25rem;
+}
+
+.info {
+  display: flex;
+  height: 6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.movie-title {
+  text-align: center;
+}
+
+.next-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+  background-color: darksalmon;
+  margin: 3rem 4rem;
+  padding: 1rem 0;
+}
+
+.next-page button {
+  height: 3rem;
+}
