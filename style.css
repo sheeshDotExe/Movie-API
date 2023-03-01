@@ -8,7 +8,7 @@ nav {
   display: flex;
   flex-direction: column;
   height: 12rem;
-  background-color: #64748b;
+  background-color: rgb(100, 116, 139);
   align-items: center;
   justify-content: center;
 }
@@ -29,15 +29,20 @@ nav h1 {
 
 #search-field {
   text-align: center;
+  border-radius: 20px;
   width: 20rem;
   height: 2rem;
+  font-size: 1rem;
+  font-weight: 800;
 }
 
 .search-results {
+  color: #e2e8f0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 2rem 4rem;
-  background-color: hsl(34, 78%, 91%);
+  background-color: rgb(100, 116, 139);
+  background-size: cover;
   padding: 1rem 1rem;
   gap: 1rem;
   border-radius: 2rem;
@@ -51,9 +56,12 @@ nav h1 {
   font-size: 1rem;
   margin-bottom: 2rem;
   height: 100%;
-  border: 2px solid black;
   border-radius: 2rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #0c4a6e;
+}
+
+.movie-poster {
+  border-radius: 20px;
 }
 
 .movie h1,
@@ -63,6 +71,12 @@ p {
 
 .movie h1 {
   font-size: 1.25rem;
+}
+
+.movie:hover h1,
+.movie:focus h1 {
+  font-size: 1.4rem;
+  transition: font-size 1s ease-out;
 }
 
 .info {
