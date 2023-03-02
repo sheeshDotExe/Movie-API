@@ -83,6 +83,7 @@ p {
 .movie:hover h1,
 .movie:focus h1 {
   font-size: 1.4rem;
+  text-decoration: underline;
   transition: font-size 1s ease-out;
 }
 
