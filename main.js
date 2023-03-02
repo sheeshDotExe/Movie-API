@@ -6,29 +6,50 @@ const APIUrl = `http://www.omdbapi.com/?apikey=${APIKey}`;
 const searchForm = document.querySelector(".search-bar");
 const searchBar = document.getElementById("search-field");
 const searchResult = document.querySelector(".search-results");
-const nextPage = document.querySelector(".next-page");
+const previous = document.getElementById("previous");
+const next = document.getElementById("next");
+const pageNumber = document.querySelector(".page");
 
 let page = 1;
 let lastSearch = null;
+let hasPrevious = false;
+let hasNext = false;
+
+function nextPage() {
+  page++;
+  window.scrollTo(0, 0);
+  handleSearch(lastSearch);
+}
+
+function previousPage() {
+  page--;
+  window.scrollTo(0, 0);
+  handleSearch(lastSearch);
+}
 
 function pageEvents() {
-  const previous = document.getElementById("previous");
-  if (previous != null) {
-    previous.addEventListener("click", () => {
-      page--;
-      window.scrollTo(0, 0);
-      handleSearch(lastSearch);
-    });
+  if (hasPrevious) {
+    previous.addEventListener("click", previousPage);
+  } else {
+    previous.removeEventListener("click", previousPage);
   }
-  const next = document.getElementById("next");
-  if (next != null) {
-    next.addEventListener("click", () => {
-      page++;
-      window.scrollTo(0, 0);
-      handleSearch(lastSearch);
-    });
+  if (hasNext) {
+    next.addEventListener("click", nextPage);
+  } else {
+    next.removeEventListener("click", nextPage);
   }
-  console.log(next);
+}
+
+function renderResult(movie) {
+  searchResult.innerHTML = `<div class="movie-info">
+    <img class="movie-poster" src="${movie.Poster}">
+    <div class="info-box">
+    <h1 class="movie-title">${movie.Title}</h1>
+    <h2 class="movie-rating">${movie.imdbRating}</h2>
+    <p class="movie-genre">${movie.Genre}</p>
+    <p class="movie-plot">${movie.Plot}</p>
+    </div>
+  </div>`;
 }
 
 function renderResults(data) {
@@ -37,24 +58,23 @@ function renderResults(data) {
   const pages = Math.ceil(data.totalResults / 10);
 
   for (const movie of data.Search) {
-    searchResult.innerHTML += `<div class="movie">
+    const moviePage = document.createElement("div");
+    moviePage.className = "movie";
+    moviePage.addEventListener("click", () => {
+      getMovie(movie.imdbID);
+    });
+    moviePage.innerHTML = `
             <div class="info">
             <h1 class="movie-title">${movie.Title}</h1>
             <p clas="movie-year">Year realeased: ${movie.Year}</p>
             </div>
-            <img class="movie-poster" src="${movie.Poster}"></img>
-        </div>`;
+            <img class="movie-poster" src="${movie.Poster}"></img>`;
+    searchResult.appendChild(moviePage);
   }
 
-  let pageBar = `<h1>Page ${page}/${pages}</h1><div>`;
-  if (page > 1) {
-    pageBar += `<button id="previous">previous page</button>`;
-  }
-  if (page < pages) {
-    pageBar += `<button id="next">next page</button>`;
-  }
-  pageBar += "</div>";
-  nextPage.innerHTML = pageBar;
+  pageNumber.innerHTML = `Page ${page}/${pages}`;
+  hasPrevious = page > 1 ? true : false;
+  hasNext = page < pages ? true : false;
   pageEvents();
 }
 
@@ -67,10 +87,16 @@ async function getSearchResults(url) {
   return await result.json();
 }
 
-async function handleSearch(value) {
-  const data = await getSearchResults(value);
+async function getMovie(movieId) {
+  const result = await fetch(APIUrl + `&i=${movieId}`).then((data) =>
+    data.json()
+  );
+  renderResult(result);
+}
+
+async function handleSearch(url) {
+  const data = await getSearchResults(url);
   renderResults(data);
-  console.log(data);
 }
 
 searchForm.addEventListener("submit", (e) => {

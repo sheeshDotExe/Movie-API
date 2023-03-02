@@ -18,6 +18,13 @@ nav h1 {
   margin: 0;
 }
 
+button {
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 5px 5px;
+}
+
 .search-bar {
   margin-top: 2rem;
   display: flex;
@@ -39,7 +46,7 @@ nav h1 {
 .search-results {
   color: #e2e8f0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   margin: 2rem 4rem;
   background-color: rgb(100, 116, 139);
   background-size: cover;
@@ -94,9 +101,8 @@ p {
 
 .next-page {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-bottom: 4rem;
   background-color: darksalmon;
   margin: 3rem 4rem;
@@ -105,4 +111,22 @@ p {
 
 .next-page button {
   height: 3rem;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.info-box p {
+  width: 15rem;
+  text-align: center;
 }
